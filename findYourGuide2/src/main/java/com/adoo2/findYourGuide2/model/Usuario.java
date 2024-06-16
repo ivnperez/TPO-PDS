@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+public class Usuario {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -19,7 +19,7 @@ public class User {
     @Column(name="name", nullable=false, length=512)
     private String name;
 
-    public User (String name) {
+    public Usuario (String name) {
         this.name = name;
     }
 }

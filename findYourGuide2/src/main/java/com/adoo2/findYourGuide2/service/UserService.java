@@ -1,6 +1,6 @@
 package com.adoo2.findYourGuide2.service;
 
-import com.adoo2.findYourGuide2.model.User;
+import com.adoo2.findYourGuide2.model.Usuario;
 import com.adoo2.findYourGuide2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User createUser(User user) {
-        return user;
+    public Usuario createUser(Usuario usuario) {
+        return usuario;
     };
 
-    public List<User> getAllUsers() {
+    public List<Usuario> getAllUsers() {
         return userRepository.findAll();
     };
 }

@@ -1,13 +1,13 @@
 package com.adoo2.findYourGuide2.repository;
 
-import com.adoo2.findYourGuide2.model.User;
+import com.adoo2.findYourGuide2.model.Usuario;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<Usuario, Long> {
 
-    List<User> findAll();
+    List<Usuario> findAll();
 
-    User findById(long id);
+    Usuario findById(long id);
 }
