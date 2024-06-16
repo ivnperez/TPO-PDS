@@ -1,6 +1,5 @@
 package com.adoo2.findYourGuide2.service;
 
-import com.adoo2.findYourGuide2.factory.StateFactory;
 import com.adoo2.findYourGuide2.model.User;
 import com.adoo2.findYourGuide2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
