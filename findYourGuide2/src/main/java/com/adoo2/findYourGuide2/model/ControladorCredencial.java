@@ -1,26 +1,26 @@
 package com.adoo2.findYourGuide2.model;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Servicio {
+public class ControladorCredencial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
-    private String descripcion;
-    private double precio;
 
-    @ManyToMany
-    private List<Reserva> reservas;
+    public ControladorCredencial(String nombre) {
+        this.nombre = nombre;
+    }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -35,21 +35,5 @@ public class Servicio {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public List<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
     }
 }

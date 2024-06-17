@@ -1,6 +1,6 @@
 package com.adoo2.findYourGuide2;
 
-import com.adoo2.findYourGuide2.rest.UserController;
+import com.adoo2.findYourGuide2.rest.UsuarioController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
