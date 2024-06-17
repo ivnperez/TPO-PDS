@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,21 +15,11 @@ import lombok.Setter;
 public class Guia extends Usuario {
     private String licencia;
     private String idiomas;
+    private String descripcion;
+    private Double calificacionPromedio;
 
-    // Getters y Setters
-    public String getLicencia() {
-        return licencia;
-    }
+    @OneToMany(mappedBy = "guia")
+    private List<Reserva> reservas;
 
-    public void setLicencia(String licencia) {
-        this.licencia = licencia;
-    }
-
-    public String getIdiomas() {
-        return idiomas;
-    }
-
-    public void setIdiomas(String idiomas) {
-        this.idiomas = idiomas;
-    }
+    // Lombok se encarga de generar los getters, setters y los constructores
 }

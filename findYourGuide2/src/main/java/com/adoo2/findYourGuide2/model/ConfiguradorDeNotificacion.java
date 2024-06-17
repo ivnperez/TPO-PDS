@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,32 +19,5 @@ public class ConfiguradorDeNotificacion {
     private String tipo;
     private String configuracion;
 
-    public ConfiguradorDeNotificacion(String tipo, String configuracion) {
-        this.tipo = tipo;
-        this.configuracion = configuracion;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getConfiguracion() {
-        return configuracion;
-    }
-
-    public void setConfiguracion(String configuracion) {
-        this.configuracion = configuracion;
-    }
+    // Lombok se encargará de generar los getters, setters y los constructores
 }

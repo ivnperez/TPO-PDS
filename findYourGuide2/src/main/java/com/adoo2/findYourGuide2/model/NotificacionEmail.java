@@ -1,5 +1,6 @@
 package com.adoo2.findYourGuide2.model;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class NotificacionEmail extends Notificacion {
     private String email;
@@ -18,12 +19,5 @@ public class NotificacionEmail extends Notificacion {
         // Lógica para enviar notificación por email
     }
 
-    // Getters y Setters
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    // Lombok se encargará de generar los getters, setters y los constructores
 }

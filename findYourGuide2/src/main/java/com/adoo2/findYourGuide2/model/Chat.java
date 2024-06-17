@@ -1,10 +1,11 @@
 package com.adoo2.findYourGuide2.model;
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,28 +21,5 @@ public class Chat {
     @OneToMany(mappedBy = "chat")
     private List<Mensaje> mensajes;
 
-    // Getters y Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Mensaje> getMensajes() {
-        return mensajes;
-    }
-
-    public void setMensajes(List<Mensaje> mensajes) {
-        this.mensajes = mensajes;
-    }
+    // Lombok se encargará de generar los getters, setters y el constructor sin argumentos
 }

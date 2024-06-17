@@ -1,6 +1,6 @@
 package com.adoo2.findYourGuide2.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,20 +15,5 @@ public class Turista extends Usuario {
     private int edad;
     private String nacionalidad;
 
-    // Getters y Setters
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
-    }
+    // Lombok se encargará de generar los getters, setters y los constructores
 }
