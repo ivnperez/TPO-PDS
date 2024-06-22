@@ -6,10 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
+import com.adoo2.findYourGuide2.rest.dto.UsuarioTuristaDTO;
+import com.adoo2.findYourGuide2.service.MedioRegistro;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Usuario {
     @Id
@@ -17,20 +22,34 @@ public class Usuario {
     private Long id;
 
     private String nombre;
+    private String apellido;
+
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
+
+    private int dni;
     private String email;
-    private String contrasena;
+    private int telefono;
+    
+    @Lob
+    private byte[] fotoPerfil; // Assuming img is stored as a byte array
 
-    @OneToOne(mappedBy = "usuario")
-    private Turista turista;
+    @OneToMany(mappedBy = "usuario")
+    private List<Viaje> historialViajes;
 
-    @OneToOne(mappedBy = "usuario")
-    private Guia guia;
+    @Enumerated(EnumType.STRING)
+    private MedioRegistro medio;
 
-    public Usuario(String nombre, String email, String contrasena) {
-        this.nombre = nombre;
-        this.email = email;
-        this.contrasena = contrasena;
+    public void agregarUsuario(Usuario usuario) {
+        // Lógica para agregar un usuario
     }
 
-    // Lombok se encargará de generar los getters, setters y los constructores
+    public void eliminarUsuario(Usuario usuario) {
+        // Lógica para eliminar un usuario
+    }
+
+    public void login(UsuarioTuristaDTO usuarioDTO) {
+        // Lógica para login
+    }
 }
+

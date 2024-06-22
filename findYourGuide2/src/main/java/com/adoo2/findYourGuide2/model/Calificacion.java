@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,12 +18,38 @@ public class Calificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int valor;
-    private String comentario;
 
     @ManyToOne
-    @JoinColumn(name = "reserva_id", nullable = false)
-    private Reserva reserva;
+    @JoinColumn(name = "guia_id", nullable = false)
+    private Guia guia;
 
-    // No need for explicit getters and setters or constructors
+    @ManyToOne
+    @JoinColumn(name = "turista_id", nullable = false)
+    private Turista turista;
+
+    private int puntaje;
+    private String comentario;
+    private Date fecha;
+
+    @OneToMany
+    @JoinColumn(name = "trofeo_id")
+    private List<Trofeo> interesados;
+
+    // Métodos específicos
+    public static Calificacion generarCalificacion(Guia guia, Turista turista) {
+        Calificacion calificacion = new Calificacion();
+        calificacion.setGuia(guia);
+        calificacion.setTurista(turista);
+        calificacion.setFecha(new Date());
+        // Otros campos a inicializar según sea necesario
+        return calificacion;
+    }
+
+    public void agregarObservador(Trofeo observador) {
+        this.interesados.add(observador);
+    }
+
+    public void eliminarObservador(Trofeo observador) {
+        this.interesados.remove(observador);
+    }
 }
