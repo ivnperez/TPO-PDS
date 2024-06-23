@@ -35,13 +35,11 @@ public class Calificacion {
     @JoinColumn(name = "trofeo_id")
     private List<Trofeo> interesados;
 
-    // Métodos específicos
     public static Calificacion generarCalificacion(Guia guia, Turista turista) {
         Calificacion calificacion = new Calificacion();
         calificacion.setGuia(guia);
         calificacion.setTurista(turista);
         calificacion.setFecha(new Date());
-        // Otros campos a inicializar según sea necesario
         return calificacion;
     }
 

@@ -5,21 +5,29 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Guia extends Usuario {
-    private String licencia;
-    private String idiomas;
-    private String descripcion;
-    private Double calificacionPromedio;
+
+    @ElementCollection
+    private List<String> ciudadesServicio;
 
     @OneToMany(mappedBy = "guia")
-    private List<Reserva> reservas;
+    private List<Servicios_Ofrecidos> servOfrecidos;
 
-    // Lombok se encarga de generar los getters, setters y los constructores
+    @OneToOne
+    @JoinColumn(name = "credencial_id", nullable = false)
+    private Credencial credencial;
+
+    @OneToMany(mappedBy = "guia", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calificacion> calificaciones;
+
+    // Métodos de negocio
+    // Se implementan en el servicio
 }

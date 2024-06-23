@@ -29,12 +29,12 @@ public class Servicios_Ofrecidos {
     @Enumerated(EnumType.STRING)
     private Servicio tipo;
 
-    public void agregarServicio(Servicios_Ofrecidos servOfrecido) {
-        // Lógica para agregar un servicio ofrecido
+    public void agregarServicio(Guia guia, Servicios_Ofrecidos servOfrecido) {
+        guia.getServOfrecidos().add(servOfrecido);
     }
 
-    public void eliminarServicio(Servicios_Ofrecidos servAEliminar) {
-        // Lógica para eliminar un servicio ofrecido
+    public void eliminarServicio(Guia guia, Servicios_Ofrecidos servAEliminar) {
+        guia.getServOfrecidos().remove(servAEliminar);
     }
 
     public double precio() {

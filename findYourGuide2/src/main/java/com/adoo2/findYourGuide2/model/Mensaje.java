@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.sql.Date;
 
 @Getter
 @Setter
@@ -16,11 +15,10 @@ public class Mensaje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String contenido;
-    private Date fecha;
+
+    private String mensaje;
 
     @ManyToOne
-    private Chat chat;
-
-    // Lombok se encargará de generar los getters, setters y los constructores
+    @JoinColumn(name = "mandado_por", nullable = false)
+    private Usuario mandadoPor;
 }

@@ -1,19 +1,31 @@
 package com.adoo2.findYourGuide2.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Turista extends Usuario {
-    private int edad;
-    private String nacionalidad;
+    @ElementCollection
+    private List<String> destinosFav;
 
-    // Lombok se encargará de generar los getters, setters y los constructores
+    private int puntuacion;
+
+    @Override
+    public void agregarUsuario(Usuario usuario) {
+        // Lógica específica para agregar un usuario turista
+    }
+
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        // Lógica específica para eliminar un usuario turista
+    }
 }
