@@ -18,6 +18,7 @@ public class Turista extends Usuario {
     private List<String> destinosFav;
 
     private int puntuacion;
+    private List<Calificacion> calificaciones;
 
     @Override
     public void agregarUsuario(Usuario usuario) {

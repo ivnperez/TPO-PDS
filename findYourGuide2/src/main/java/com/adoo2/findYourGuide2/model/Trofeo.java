@@ -31,9 +31,8 @@ public abstract class Trofeo {
     @JoinColumn(name = "calificacion_id", nullable = false)
     private Calificacion observable;
 
-    public abstract boolean verificarCriterios();
-    
-    public void otorgarTrofeo(Usuario usuario, Trofeo trofeo) {
-        // Lógica para otorgar el trofeo
-    }
+    public abstract boolean verificarCriterios(Guia guia, Turista turista);
+
+    public abstract void otorgarTrofeo(Usuario usuario);
+
 }

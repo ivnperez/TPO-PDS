@@ -30,7 +30,7 @@ public class Usuario {
     private int dni;
     private String email;
     private int telefono;
-    
+
     @Lob
     private byte[] fotoPerfil; // Assuming img is stored as a byte array
 
@@ -39,6 +39,9 @@ public class Usuario {
 
     @Enumerated(EnumType.STRING)
     private MedioRegistro medio;
+
+    private List<Trofeo> ListaTrofeos;
+    private List<Calificacion> ListaCalificaciones;
 
     public void agregarUsuario(Usuario usuario) {
         // Lógica para agregar un usuario
@@ -52,4 +55,3 @@ public class Usuario {
         // Lógica para login
     }
 }
-
