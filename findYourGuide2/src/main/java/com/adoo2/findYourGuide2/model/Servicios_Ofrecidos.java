@@ -20,13 +20,12 @@ public class Servicios_Ofrecidos {
 
     private String descripcion;
     private String zona;
-    
+
     @ElementCollection
     private List<String> idiomas;
 
     private int tamMaxGrupo;
 
-    @Enumerated(EnumType.STRING)
     private Servicio tipo;
 
     public void agregarServicio(Guia guia, Servicios_Ofrecidos servOfrecido) {
@@ -38,7 +37,6 @@ public class Servicios_Ofrecidos {
     }
 
     public double precio() {
-        // Lógica para calcular el precio del servicio ofrecido
-        return 0.0;
+        return tipo.getPrecio();
     }
 }

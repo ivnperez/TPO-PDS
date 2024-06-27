@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class Impaga implements IEstado {
 
+    private Stripe stripe;
+
     @Override
     public void pagar(Factura factura) {
-        // Lógica para manejar el pago de una factura impaga
+        stripe.pagar(factura);
         System.out.println("Pagando factura impaga: " + factura.getId());
         factura.cambiarEstado(new Paga());
     }
