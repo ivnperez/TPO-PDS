@@ -40,7 +40,7 @@ public class Factura {
     @Transient
     private IEstado estado;
 
-    @Autowired
+//    @Autowired
     private Notificador notificador;
 
     public void enviarFactura(Turista turista) { 

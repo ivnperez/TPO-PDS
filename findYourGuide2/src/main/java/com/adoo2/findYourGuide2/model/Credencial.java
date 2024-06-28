@@ -17,7 +17,7 @@ import java.util.Date;
 public class Credencial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id = 1L;
 
     @Lob
     private byte[] foto;
@@ -31,7 +31,7 @@ public class Credencial {
     private IAdapterVerificadorCredencial adapter;
 
     public void subir(Guia guia) {
-        guia.setCredencial(this);
+        // guia.setCredencial(this);
     }
 
     public boolean verificarCredencial(Credencial credencial) {

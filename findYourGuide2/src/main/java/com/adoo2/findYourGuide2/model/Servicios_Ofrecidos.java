@@ -26,6 +26,7 @@ public class Servicios_Ofrecidos {
 
     private int tamMaxGrupo;
 
+    @Transient
     private Servicio tipo;
 
     public void agregarServicio(Guia guia, Servicios_Ofrecidos servOfrecido) {

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.adoo2.findYourGuide2.service.IEstadoReserva;
 
 @Getter
@@ -17,6 +19,9 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime fechaHora;
+
+    @Autowired
+    @Transient
     private IEstadoReserva estado;
 
     @ManyToOne
