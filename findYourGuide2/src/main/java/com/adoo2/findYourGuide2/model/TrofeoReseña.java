@@ -1,10 +1,15 @@
 package com.adoo2.findYourGuide2.model;
 
+import java.util.stream.Collectors;
+
+import com.adoo2.findYourGuide2.service.UsuarioService;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,13 +20,22 @@ public class TrofeoReseña extends Trofeo {
     private int minPuntuacionesDadas = 11;
 
     @Override
-    public boolean verificarCriterios() {
-        // Lógica para verificar criterios de TrofeoReseña
-        return true;
+    public boolean verificarCriterios(Guia guia, Turista turista) {
+
+        List<Calificacion> CalificacionesUnicas = guia.getListaCalificaciones().stream()
+                .distinct()
+                .collect(Collectors.toList());
+        // if (CalificacionesUnicas.size()>= minPuntuacionesDadas) {
+        // otorgarTrofeo(guia);
+        // }
+
+        return CalificacionesUnicas.size() >= minPuntuacionesDadas;
     }
 
     @Override
-    public void otorgarTrofeo(Usuario usuario, Trofeo trofeo) {
-        // Lógica específica para otorgar TrofeoReseña
+    public void otorgarTrofeo(Usuario usuario) {
+        TrofeoReseña trofeo = new TrofeoReseña();
+        usuario.getListaTrofeos().add(trofeo);
+        trofeo.setUsuario(usuario);
     }
 }

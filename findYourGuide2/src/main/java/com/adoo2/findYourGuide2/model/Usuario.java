@@ -43,6 +43,9 @@ public class Usuario {
     @Transient
     private MedioRegistro medio;
 
+    private List<Trofeo> ListaTrofeos;
+    private List<Calificacion> ListaCalificaciones;
+
     public void agregarUsuario(Usuario usuario) {
         // Lógica para agregar un usuario
     }
