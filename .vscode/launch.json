@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FindYourGuide2Application<findYourGuide2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.adoo2.findYourGuide2.FindYourGuide2Application",
+            "projectName": "findYourGuide2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
