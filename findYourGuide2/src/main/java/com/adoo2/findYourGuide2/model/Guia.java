@@ -18,11 +18,11 @@ public class Guia extends Usuario {
     @ElementCollection
     private List<String> ciudadesServicio;
 
-    @OneToMany(mappedBy = "guia")
+    @OneToMany
     private List<Servicios_Ofrecidos> servOfrecidos;
 
     @OneToOne
-    @JoinColumn(name = "credencial_id", nullable = false)
+    @JoinColumn(name = "credencial_id", nullable = true)
     private Credencial credencial;
 
     @OneToMany(mappedBy = "guia", cascade = CascadeType.ALL, orphanRemoval = true)

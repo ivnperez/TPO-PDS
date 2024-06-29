@@ -53,8 +53,7 @@ public class Viaje {
     private IEstadoViaje estadoViaje;
 
     public double precioTotal() {
-        // Lógica para calcular el precio total
-        return total + tour.precio(); // Asumiendo que `tour.precio()` retorna el precio del servicio ofrecido
+        return total + tour.precio();
     }
 
     public void aceptar(Guia guia, Turista turista) {
@@ -74,6 +73,6 @@ public class Viaje {
     }
 
     public void pagar() {
-        // Lógica para pagar el viaje
+        factura.pagar();
     }
 }

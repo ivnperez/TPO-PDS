@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.adoo2.findYourGuide2.rest.dto.UsuarioTuristaDTO;
 import com.adoo2.findYourGuide2.service.MedioRegistro;
 
@@ -34,10 +36,11 @@ public class Usuario {
     @Lob
     private byte[] fotoPerfil; // Assuming img is stored as a byte array
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "turista")
     private List<Viaje> historialViajes;
 
-    @Enumerated(EnumType.STRING)
+    @Autowired
+    @Transient
     private MedioRegistro medio;
 
     private List<Trofeo> ListaTrofeos;

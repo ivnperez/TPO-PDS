@@ -31,7 +31,7 @@ public class ReservaService {
         reserva.setTurista(turistaRepository.findById(crearReservaDTO.getTuristaId()).orElse(null));
         reserva.setGuia(guiaRepository.findById(crearReservaDTO.getGuiaId()).orElse(null));
         reserva.setFechaHora(crearReservaDTO.getFechaHora());
-        reserva.setEstado("Pendiente"); // o el estado inicial deseado
+        reserva.setEstado(new Pendiente()); // o el estado inicial deseado
         return reservaRepository.save(reserva);
     }
 }

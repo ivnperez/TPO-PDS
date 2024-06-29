@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.adoo2.findYourGuide2.service.IEstadoReserva;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,7 +19,10 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime fechaHora;
-    private String estado;
+
+    @Autowired
+    @Transient
+    private IEstadoReserva estado;
 
     @ManyToOne
     private Turista turista;
@@ -23,5 +30,19 @@ public class Reserva {
     @ManyToOne
     private Guia guia;
 
-    // Getters y Setters (Lombok se encarga de esto)
+    @OneToOne
+    private Viaje viaje;
+
+    public void pagar() {
+        estado.pagar(this, null);
+    }
+
+    public void cancelar() {
+        estado.cancelar(this);
+    }
+
+    public void cambiarEstado(IEstadoReserva nuevoEstado) {
+        this.setEstado(nuevoEstado);
+    }
+
 }
