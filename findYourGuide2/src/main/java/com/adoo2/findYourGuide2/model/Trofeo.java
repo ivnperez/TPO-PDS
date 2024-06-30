@@ -34,5 +34,4 @@ public abstract class Trofeo {
     public abstract boolean verificarCriterios(Guia guia, Turista turista);
 
     public abstract void otorgarTrofeo(Usuario usuario);
-
 }

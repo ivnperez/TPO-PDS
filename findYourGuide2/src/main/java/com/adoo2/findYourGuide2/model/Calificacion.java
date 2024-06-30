@@ -27,13 +27,16 @@ public class Calificacion {
     @JoinColumn(name = "turista_id", nullable = false)
     private Turista turista;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
     private int puntaje;
     private String comentario;
     private Date fecha;
 
-    @OneToMany
-    @JoinColumn(name = "trofeo_id")
-    static private List<Trofeo> interesados;
+    @OneToMany(mappedBy = "observable", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Trofeo> interesados;
 
     public static Calificacion generarCalificacion(Guia guia, Turista turista, int puntaje) {
         Calificacion calificacion = new Calificacion();
@@ -41,7 +44,7 @@ public class Calificacion {
         calificacion.setTurista(turista);
         calificacion.setFecha(new Date());
         calificacion.setPuntaje(puntaje);
-        interesados.forEach(trofeo -> trofeo.verificarCriterios(guia, turista));
+        // Añadir lógica para verificar criterios y otorgar trofeos si es necesario
         return calificacion;
     }
 
@@ -53,3 +56,4 @@ public class Calificacion {
         this.interesados.remove(observador);
     }
 }
+

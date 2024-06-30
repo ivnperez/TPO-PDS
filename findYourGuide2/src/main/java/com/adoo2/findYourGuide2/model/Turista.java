@@ -18,6 +18,7 @@ public class Turista extends Usuario {
     private List<String> destinosFav;
 
     private int puntuacion;
+    @OneToMany(mappedBy = "turista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calificacion> calificaciones;
 
     @Override
