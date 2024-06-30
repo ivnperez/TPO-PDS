@@ -17,7 +17,7 @@ import com.adoo2.findYourGuide2.service.MedioRegistro;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@MappedSuperclass
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +35,6 @@ public class Usuario {
 
     @Lob
     private byte[] fotoPerfil; // Assuming img is stored as a byte array
-
-    @OneToMany(mappedBy = "turista")
-    private List<Viaje> historialViajes;
 
     @Autowired
     @Transient

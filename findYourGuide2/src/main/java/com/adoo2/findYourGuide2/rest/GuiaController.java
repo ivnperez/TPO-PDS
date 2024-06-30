@@ -20,6 +20,11 @@ public class GuiaController {
         return guiaService.obtenerGuia(null);
     }
 
+    @PostMapping
+    public Guia createUsuario(@RequestBody Guia guia) {
+        return guiaService.save(guia);
+    }
+
     @PostMapping("/{guiaId}/calificaciones")
     public void agregarCalificacion(@PathVariable Long guiaId, @RequestBody Calificacion calificacion) {
         guiaService.agregarCalificacion(calificacion, guiaId);

@@ -22,7 +22,7 @@ public class TrofeoExito extends Trofeo {
     }
 
     @Override
-    public void otorgarTrofeo(Usuario usuario, Trofeo trofeo) {
+    public void otorgarTrofeo(Turista turista, Trofeo trofeo) {
         // Lógica específica para otorgar TrofeoExito
     }
 }

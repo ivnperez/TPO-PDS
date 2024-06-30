@@ -14,6 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Turista extends Usuario {
+
+    @OneToMany(mappedBy = "turista")
+    private List<Viaje> historialViajes;
+
     @ElementCollection
     private List<String> destinosFav;
 

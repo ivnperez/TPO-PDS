@@ -26,15 +26,17 @@ public class Viaje {
     private Date fechaFin;
 
     private double comisionDePlataforma;
-    private double anticipo;
+    private double anticipo = 100.00;
     private double total;
 
     @ManyToOne
     @JoinColumn(name = "guia_id", nullable = false)
+    // @ElementCollection
     private Guia guia;
 
     @ManyToOne
     @JoinColumn(name = "turista_id", nullable = false)
+    // @ElementCollection
     private Turista turista;
 
     @ManyToOne

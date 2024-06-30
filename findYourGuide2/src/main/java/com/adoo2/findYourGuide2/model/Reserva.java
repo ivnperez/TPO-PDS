@@ -33,8 +33,8 @@ public class Reserva {
     @OneToOne
     private Viaje viaje;
 
-    public void pagar() {
-        estado.pagar(this, null);
+    public void pagar(Double monto) {
+        estado.pagar(this, monto);
     }
 
     public void cancelar() {

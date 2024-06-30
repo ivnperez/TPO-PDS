@@ -28,6 +28,9 @@ public class Guia extends Usuario {
     @OneToMany(mappedBy = "guia", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calificacion> calificaciones;
 
+    @OneToMany(mappedBy = "guia")
+    private List<Viaje> historialViajes;
+
     // Métodos de negocio
     // Se implementan en el servicio
 }

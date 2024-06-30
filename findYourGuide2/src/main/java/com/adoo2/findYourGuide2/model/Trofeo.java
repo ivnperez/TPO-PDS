@@ -21,8 +21,8 @@ public abstract class Trofeo {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "turista_id", nullable = false)
+    private Turista turista;
 
     @Temporal(TemporalType.DATE)
     private Date fechaObtencion;
@@ -33,7 +33,7 @@ public abstract class Trofeo {
 
     public abstract boolean verificarCriterios();
     
-    public void otorgarTrofeo(Usuario usuario, Trofeo trofeo) {
+    public void otorgarTrofeo(Turista turista, Trofeo trofeo) {
         // Lógica para otorgar el trofeo
     }
 }

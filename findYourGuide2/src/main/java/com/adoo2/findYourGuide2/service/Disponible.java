@@ -9,10 +9,10 @@ public class Disponible implements IEstadoViaje {
 
     @Override
     public void aceptar(Guia guia, Turista turista, Viaje viaje) {
-        Reserva reserva = new Reserva();
-        viaje.setReserva(reserva);
-        IEstadoViaje estado = new Reservado();
-        viaje.setEstadoViaje(estado);
+        // Reserva reserva = new Reserva();
+        // viaje.setReserva(reserva);
+        // IEstadoViaje estado = new Reservado();
+        // viaje.setEstadoViaje(estado);
     }
 
     @Override
@@ -28,6 +28,7 @@ public class Disponible implements IEstadoViaje {
 
     @Override
     public void reservar(Guia guia, Turista turista, Viaje viaje) {
-        // Lógica para reservar un viaje disponible
+        Reserva reserva = viaje.getReserva();
+        reserva.pagar(viaje.getAnticipo());
     }
 }

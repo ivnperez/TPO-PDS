@@ -11,8 +11,6 @@ import lombok.Setter;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Getter
 @Setter
 @NoArgsConstructor

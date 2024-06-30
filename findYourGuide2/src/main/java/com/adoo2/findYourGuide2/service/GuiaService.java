@@ -2,6 +2,7 @@ package com.adoo2.findYourGuide2.service;
 
 import com.adoo2.findYourGuide2.model.Calificacion;
 import com.adoo2.findYourGuide2.model.Guia;
+import com.adoo2.findYourGuide2.model.Turista;
 import com.adoo2.findYourGuide2.repository.GuiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class GuiaService {
 
     @Autowired
     private GuiaRepository guiaRepository;
+
+    public Guia save(Guia guia) {
+        return guiaRepository.save(guia);
+    }
 
     public List<Guia> obtenerGuia(Guia guia) {
         return guiaRepository.findAll();
