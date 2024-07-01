@@ -27,12 +27,15 @@ public class Calificacion {
     @JoinColumn(name = "turista_id", nullable = false)
     private Turista turista;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
     private int puntaje;
     private String comentario;
     private Date fecha;
 
-    @OneToMany(mappedBy = "observable", cascade = CascadeType.ALL, orphanRemoval
-    = true)
+    @OneToMany(mappedBy = "observable", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trofeo> interesados;
 
     public static Calificacion generarCalificacion(Guia guia, Turista turista, int puntaje) {
@@ -53,3 +56,4 @@ public class Calificacion {
     // interesados.remove(observador);
     // }
 }
+

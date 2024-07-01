@@ -2,6 +2,8 @@ package com.adoo2.findYourGuide2.model;
 
 import java.util.stream.Collectors;
 
+import com.adoo2.findYourGuide2.service.UsuarioService;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Getter;

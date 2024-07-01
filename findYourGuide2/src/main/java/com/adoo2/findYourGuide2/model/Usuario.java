@@ -2,13 +2,17 @@ package com.adoo2.findYourGuide2.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.adoo2.findYourGuide2.rest.dto.UsuarioTuristaDTO;
 import com.adoo2.findYourGuide2.service.MedioRegistro;
@@ -18,6 +22,7 @@ import com.adoo2.findYourGuide2.service.MedioRegistro;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
+@Builder
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +36,7 @@ public class Usuario {
 
     private int dni;
     private String email;
+    private String pass;
     private int telefono;
 
     @Lob
@@ -39,6 +45,10 @@ public class Usuario {
     @Autowired
     @Transient
     private MedioRegistro medio;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Trofeo> listaTrofeos;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calificacion> listaCalificaciones;
 
     // private List<Trofeo> ListaTrofeos;
     // private List<Calificacion> ListaCalificaciones;
@@ -53,5 +63,46 @@ public class Usuario {
 
     public void login(UsuarioTuristaDTO usuarioDTO) {
         // Lógica para login
+    }
+
+    // @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this instanceof Guia) {
+            return List.of(new SimpleGrantedAuthority("GUIA"));
+        } else if (this instanceof Turista) {
+            return List.of(new SimpleGrantedAuthority("TURISTA"));
+        } else {
+            return List.of();
+        }
+    }
+
+    // @Override
+    public String getPassword() {
+        return this.pass;
+    }
+
+    // @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    // @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    // @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    // @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    // @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
