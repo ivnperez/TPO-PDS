@@ -23,6 +23,9 @@ public class Turista extends Usuario {
 
     private int puntuacion;
 
+    @OneToMany(mappedBy = "turista", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calificacion> calificaciones;
+
     @Override
     public void agregarUsuario(Usuario usuario) {
         // Lógica específica para agregar un usuario turista

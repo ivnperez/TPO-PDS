@@ -31,23 +31,25 @@ public class Calificacion {
     private String comentario;
     private Date fecha;
 
-    @OneToMany
-    @JoinColumn(name = "trofeo_id")
+    @OneToMany(mappedBy = "observable", cascade = CascadeType.ALL, orphanRemoval
+    = true)
     private List<Trofeo> interesados;
 
-    public static Calificacion generarCalificacion(Guia guia, Turista turista) {
+    public static Calificacion generarCalificacion(Guia guia, Turista turista, int puntaje) {
         Calificacion calificacion = new Calificacion();
         calificacion.setGuia(guia);
         calificacion.setTurista(turista);
         calificacion.setFecha(new Date());
+        calificacion.setPuntaje(puntaje);
+        // interesados.forEach(trofeo -> trofeo.verificarCriterios(guia, turista));
         return calificacion;
     }
 
-    public void agregarObservador(Trofeo observador) {
-        this.interesados.add(observador);
-    }
+    // public void agregarObservador(Trofeo observador) {
+    // interesados.add(observador);
+    // }
 
-    public void eliminarObservador(Trofeo observador) {
-        this.interesados.remove(observador);
-    }
+    // public void eliminarObservador(Trofeo observador) {
+    // interesados.remove(observador);
+    // }
 }

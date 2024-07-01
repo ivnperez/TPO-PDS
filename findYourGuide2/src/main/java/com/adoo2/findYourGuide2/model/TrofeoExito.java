@@ -16,13 +16,25 @@ public class TrofeoExito extends Trofeo {
     private int minimoCalificaciones = 10;
 
     @Override
-    public boolean verificarCriterios() {
-        // Lógica para verificar criterios de TrofeoExito
-        return true;
+    public boolean verificarCriterios(Guia guia, Turista turista) {
+        int cant = guia.getCalificaciones().size();
+        boolean darTrofeo = false;
+        for (Calificacion calif : guia.getCalificaciones()) {
+            if (calif.getPuntaje() > calificacion && cant > minimoCalificaciones) {
+                darTrofeo = true;
+            }
+        }
+        // if ((darTrofeo)) {
+        // otorgarTrofeo(guia);
+        // }
+        return darTrofeo;
     }
 
     @Override
     public void otorgarTrofeo(Turista turista, Trofeo trofeo) {
         // Lógica específica para otorgar TrofeoExito
+        // TrofeoExito trofeo = new TrofeoExito();
+        // usuario.getListaTrofeos().add(trofeo);
+        // trofeo.setUsuario(usuario);
     }
 }
