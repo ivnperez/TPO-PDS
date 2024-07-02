@@ -19,6 +19,6 @@ public class CrearViajeRequest {
     private double total;
     private Long guiaId;
     private Long turistaId;
-    private Long tourId;
-    private Long facturaId;
+//    private Long tourId;
+//    private Long facturaId;
 }

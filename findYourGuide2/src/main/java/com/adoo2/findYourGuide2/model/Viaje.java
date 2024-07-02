@@ -38,16 +38,18 @@ public class Viaje {
     private Turista turista;
 
     @ManyToOne
-    @JoinColumn(name = "servicios_ofrecidos_id", nullable = false)
+    @JoinColumn(name = "servicios_ofrecidos_id", nullable = true)
     private Servicios_Ofrecidos tour;
 
     @ManyToOne
-    @JoinColumn(name = "factura_id", nullable = false)
+    @JoinColumn(name = "factura_id", nullable = true)
     private Factura factura;
 
     @ManyToOne
     @JoinColumn(name = "reserva_id", nullable = true)
     private Reserva reserva;
+
+    private String estado;
 
     @Transient
     private IEstadoViaje estadoViaje;
@@ -60,22 +62,22 @@ public class Viaje {
         estadoViaje.aceptar(guia, turista, this);
         return this;
     }
-    
+
     public Viaje cancelar(Guia guia, Turista turista) {
         estadoViaje.cancelar(guia, turista, this);
         return this;
     }
-    
+
     public Viaje concretar(Guia guia, Turista turista) {
         estadoViaje.concretar(guia, turista, this);
         return this;
     }
-    
+
     public Viaje reservar(Guia guia, Turista turista) {
         estadoViaje.reservar(guia, turista, this);
         return this;
     }
-    
+
     public void pagar() {
         factura.pagar();
     }
