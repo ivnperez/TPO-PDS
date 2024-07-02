@@ -56,6 +56,4 @@ public abstract class Trofeo {
     public void setfecha(Date fecha){
         this.fechaObtencion = fecha;
     }
-
-   
 }

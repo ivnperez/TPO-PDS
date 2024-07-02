@@ -1,8 +1,11 @@
 package com.adoo2.findYourGuide2.model;
-
 import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.adoo2.findYourGuide2.rest.dto.UsuarioTuristaDTO;
 import com.adoo2.findYourGuide2.service.MedioRegistro;
@@ -27,7 +30,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,7 +44,9 @@ public class Usuario {
 
     private int dni;
     private String email;
+    private String pass;
     private int telefono;
+    private String role;
 
     @Lob
     private byte[] fotoPerfil; // Assuming img is stored as a byte array
@@ -54,6 +60,19 @@ public class Usuario {
     @Autowired
     @Transient
     private MedioRegistro medio;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Trofeo> listaTrofeos;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calificacion> listaCalificaciones;
+
+    public Usuario(String nombre, String apellido, int dni, String email, String pass, int telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.email = email;
+        this.pass = pass;
+        this.telefono = telefono;
+    }
 
     public void agregarUsuario(Usuario usuario) {
         // Lógica para agregar un usuario
@@ -66,11 +85,52 @@ public class Usuario {
     public void login(UsuarioTuristaDTO usuarioDTO) {
         // Lógica para login
     }
+
     public List<Trofeo> getListaTrofeos(){
         return trofeos;
     }
 
     public Long getId(){
         return id;
+      
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this instanceof Guia) {
+            return List.of(new SimpleGrantedAuthority("GUIA"));
+        } else if (this instanceof Turista) {
+            return List.of(new SimpleGrantedAuthority("TURISTA"));
+        } else {
+            return List.of();
+        }
+    }
+
+    @Override
+    public String getPassword() {
+        return this.pass;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

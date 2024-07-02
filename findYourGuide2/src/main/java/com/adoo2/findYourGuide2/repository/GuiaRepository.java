@@ -11,6 +11,7 @@ import com.adoo2.findYourGuide2.model.Guia;
 public interface GuiaRepository extends JpaRepository<Guia, Long> {
     List<Guia> findByNombreContainingOrApellidoContaining(String nombre, String apellido);
     Guia findById(long id);
+    List<Guia> findAll();
 }
 
 

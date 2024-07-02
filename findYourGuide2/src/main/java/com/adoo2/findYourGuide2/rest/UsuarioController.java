@@ -1,5 +1,6 @@
 package com.adoo2.findYourGuide2.rest;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
     @Autowired
     private GuiaService guiaService;
+
     @Autowired
     private TuristaService turistaService;
     @Autowired
@@ -43,7 +45,7 @@ public class UsuarioController {
     @Autowired
     @Transient
     private TrofeoService trofeoService;
-
+  
     @GetMapping
     public List<Usuario> getAllUsuarios() {
         return usuarioService.findAll();
@@ -58,6 +60,10 @@ public class UsuarioController {
     public Usuario createUsuario(@RequestBody Usuario usuario) {
         return usuarioService.save(usuario);
     }
+    // @PostMapping("/guia")
+    // public Usuario createUsuario(@RequestBody Guia guia) {
+    //     return guiaService.save(guia);
+    // }
 
     @PostMapping("/guia")
     public Usuario createGuia(@RequestBody Guia guia) {

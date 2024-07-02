@@ -5,6 +5,10 @@ import java.util.stream.Collectors;
 
 import com.adoo2.findYourGuide2.service.CalificacionService;
 
+import java.util.stream.Collectors;
+
+import com.adoo2.findYourGuide2.service.UsuarioService;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -35,7 +39,6 @@ public class TrofeoReseña extends Trofeo {
         .stream()
         .map(calificaciones -> calificaciones.get(0)) // Obtener la primera calificación por cada guía
         .collect(Collectors.toList());
-
         if (CalificacionesUnicas.size()>= minPuntuacionesDadas) {
             darTrofeo = true;
         }
@@ -51,6 +54,5 @@ public class TrofeoReseña extends Trofeo {
         trofeo.setUsuario(usuario);
         trofeo.setfecha(new Date());
         return trofeo;
-
     }
 }

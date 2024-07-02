@@ -35,6 +35,10 @@ public class Guia extends Usuario {
     @JsonManagedReference
     private List<Calificacion> calificaciones;
 
+    public Guia(String nombre, String apellido, int dni, String email, String pass, int telefono) {
+        super(nombre, apellido, dni, email, pass, telefono);
+    }
+
     // Métodos de negocio
     // Se implementan en el servicio
     public List<Calificacion>getListaCalificaciones(){

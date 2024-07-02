@@ -9,25 +9,22 @@ public class Disponible implements IEstadoViaje {
 
     @Override
     public void aceptar(Guia guia, Turista turista, Viaje viaje) {
-        Reserva reserva = new Reserva();
-        viaje.setReserva(reserva);
-        IEstadoViaje estado = new Reservado();
-        viaje.setEstadoViaje(estado);
+        System.out.println("no se puede aceptar, ya que no se encuentra en reservado");
     }
 
     @Override
     public void cancelar(Guia guia, Turista turista, Viaje viaje) {
-        IEstadoViaje estado = new ViajeCancelado();
-        viaje.setEstadoViaje(estado);
+        System.out.println("no se puede cancelar, ya que no se encuentra en reservado o aceptado");
     }
 
     @Override
     public void concretar(Guia guia, Turista turista, Viaje viaje) {
-        // Lógica para concretar un viaje disponible
+        System.out.println("no se puede concretar, ya que no se encuentra en aceptado");
     }
 
     @Override
     public void reservar(Guia guia, Turista turista, Viaje viaje) {
-        // Lógica para reservar un viaje disponible
+        Reservado estado = new Reservado();
+        viaje.setEstadoViaje(estado);
     }
 }
