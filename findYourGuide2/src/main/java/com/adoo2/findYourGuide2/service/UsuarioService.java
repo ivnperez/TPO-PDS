@@ -28,4 +28,8 @@ public class UsuarioService {
     public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
+
+    // public void getGuias() {
+    // usuarioRepository.findByRole("guia");
+    // }
 }

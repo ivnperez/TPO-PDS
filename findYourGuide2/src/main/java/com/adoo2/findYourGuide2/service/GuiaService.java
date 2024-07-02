@@ -2,8 +2,9 @@ package com.adoo2.findYourGuide2.service;
 
 import com.adoo2.findYourGuide2.model.Calificacion;
 import com.adoo2.findYourGuide2.model.Guia;
-import com.adoo2.findYourGuide2.model.Usuario;
 import com.adoo2.findYourGuide2.repository.GuiaRepository;
+import com.adoo2.findYourGuide2.repository.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,18 @@ import java.util.Optional;
 public class GuiaService {
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private GuiaRepository guiaRepository;
 
     public List<Guia> obtenerGuia(Guia guia) {
         return guiaRepository.findAll();
     }
-    public Guia save(Guia guia) {
-        return guiaRepository.save(guia);
-    }
 
+    // public Guia save(Guia guia) {
+    // return usuarioepository.save(guia);
+    // }
 
     public void agregarCalificacion(Calificacion calificacion, Long guiaId) {
         Optional<Guia> guiaOptional = guiaRepository.findById(guiaId);
@@ -30,7 +34,7 @@ public class GuiaService {
             Guia guia = guiaOptional.get();
             guia.getCalificaciones().add(calificacion);
             calificacion.setGuia(guia);
-            guiaRepository.save(guia);
+            usuarioRepository.save(guia);
         }
     }
 

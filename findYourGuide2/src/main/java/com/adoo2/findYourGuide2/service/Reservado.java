@@ -11,21 +11,23 @@ public class Reservado implements IEstadoViaje {
 
     @Override
     public void aceptar(Guia guia, Turista turista, Viaje viaje) {
-        // Lógica para aceptar un viaje reservado
+        Aceptado estado = new Aceptado();
+        viaje.setEstadoViaje(estado);
     }
 
     @Override
     public void cancelar(Guia guia, Turista turista, Viaje viaje) {
-        // Lógica para cancelar un viaje reservado
+        Disponible estado = new Disponible();
+        viaje.setEstadoViaje(estado);
     }
 
     @Override
     public void concretar(Guia guia, Turista turista, Viaje viaje) {
-        // Lógica para concretar un viaje reservado
+        System.out.println("no se puede concretar, ya que no se encuentra en aceptado");
     }
 
     @Override
     public void reservar(Guia guia, Turista turista, Viaje viaje) {
-        // Lógica para reservar un viaje reservado
+        System.out.println("ya se encuentra en reservado");
     }
 }

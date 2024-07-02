@@ -2,13 +2,18 @@ package com.adoo2.findYourGuide2.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.adoo2.findYourGuide2.rest.dto.UsuarioTuristaDTO;
 import com.adoo2.findYourGuide2.service.MedioRegistro;
@@ -18,7 +23,8 @@ import com.adoo2.findYourGuide2.service.MedioRegistro;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +37,9 @@ public class Usuario {
 
     private int dni;
     private String email;
+    private String pass;
     private int telefono;
+    private String role;
 
     @Lob
     private byte[] fotoPerfil; // Assuming img is stored as a byte array
@@ -42,9 +50,19 @@ public class Usuario {
     @Autowired
     @Transient
     private MedioRegistro medio;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Trofeo> listaTrofeos;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calificacion> listaCalificaciones;
 
-    private List<Trofeo> ListaTrofeos;
-    private List<Calificacion> ListaCalificaciones;
+    public Usuario(String nombre, String apellido, int dni, String email, String pass, int telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.email = email;
+        this.pass = pass;
+        this.telefono = telefono;
+    }
 
     public void agregarUsuario(Usuario usuario) {
         // Lógica para agregar un usuario
@@ -56,5 +74,46 @@ public class Usuario {
 
     public void login(UsuarioTuristaDTO usuarioDTO) {
         // Lógica para login
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this instanceof Guia) {
+            return List.of(new SimpleGrantedAuthority("GUIA"));
+        } else if (this instanceof Turista) {
+            return List.of(new SimpleGrantedAuthority("TURISTA"));
+        } else {
+            return List.of();
+        }
+    }
+
+    @Override
+    public String getPassword() {
+        return this.pass;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
