@@ -56,22 +56,26 @@ public class Viaje {
         return total + tour.precio();
     }
 
-    public void aceptar(Guia guia, Turista turista) {
+    public Viaje aceptar(Guia guia, Turista turista) {
         estadoViaje.aceptar(guia, turista, this);
+        return this;
     }
-
-    public void cancelar(Guia guia, Turista turista) {
+    
+    public Viaje cancelar(Guia guia, Turista turista) {
         estadoViaje.cancelar(guia, turista, this);
+        return this;
     }
-
-    public void concretar(Guia guia, Turista turista) {
+    
+    public Viaje concretar(Guia guia, Turista turista) {
         estadoViaje.concretar(guia, turista, this);
+        return this;
     }
-
-    public void reservar(Guia guia, Turista turista) {
+    
+    public Viaje reservar(Guia guia, Turista turista) {
         estadoViaje.reservar(guia, turista, this);
+        return this;
     }
-
+    
     public void pagar() {
         factura.pagar();
     }
