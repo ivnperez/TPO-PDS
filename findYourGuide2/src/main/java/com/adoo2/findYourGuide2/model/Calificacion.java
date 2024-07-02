@@ -1,13 +1,23 @@
 package com.adoo2.findYourGuide2.model;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.adoo2.findYourGuide2.service.CalificacionService;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -21,33 +31,65 @@ public class Calificacion {
 
     @ManyToOne
     @JoinColumn(name = "guia_id", nullable = false)
+    @JsonBackReference
     private Guia guia;
 
     @ManyToOne
     @JoinColumn(name = "turista_id", nullable = false)
     private Turista turista;
 
+
     private int puntaje;
     private String comentario;
     private Date fecha;
 
-    @OneToMany
-    @JoinColumn(name = "trofeo_id")
-    private List<Trofeo> interesados;
+    @Transient
+    private static List<Trofeo> interesados = new ArrayList<>();
 
-    public static Calificacion generarCalificacion(Guia guia, Turista turista) {
+ 
+
+    public static CalificacionTrofeo generarCalificacion(Guia guia, Turista turista, int puntaje, String comentario,CalificacionService calificacionService) {
+        System.out.println("llegue a calificacion");
         Calificacion calificacion = new Calificacion();
-        calificacion.setGuia(guia);
-        calificacion.setTurista(turista);
-        calificacion.setFecha(new Date());
-        return calificacion;
+        calificacion.guia= guia;
+        calificacion.turista= turista;
+        calificacion.fecha =(new Date());
+        calificacion.puntaje =puntaje;
+        calificacion.comentario = comentario;
+        //interesados.forEach(trofeo -> trofeo.verificarCriterios(guia, turista));
+        CalificacionTrofeo ct= new CalificacionTrofeo();
+        ct.setTrofeo(null);
+        for (Trofeo observador : interesados) {
+            if (observador.verificarCriterios(guia, turista,calificacionService)) {
+                Trofeo otorgado = observador.otorgarTrofeo(guia);
+                ct.setTrofeo(otorgado);
+            }
+        }
+        ct.setCalificacion(calificacion);
+        return ct;
     }
 
-    public void agregarObservador(Trofeo observador) {
-        this.interesados.add(observador);
+    public static void agregarObservador(Trofeo observador) {
+        interesados.add(observador);
+    }
+
+    public static List<Trofeo>  devolverObservadores() {
+        for (Object interesados : interesados) {
+            System.out.print(interesados);
+        }
+        return interesados;
     }
 
     public void eliminarObservador(Trofeo observador) {
         this.interesados.remove(observador);
+    }
+    public int getPuntaje(){
+        return puntaje;
+    }
+    public void setGuia(Guia guia){
+        this.guia = guia;
+    }
+    public Long getGuia(){
+        return id;
     }
 }

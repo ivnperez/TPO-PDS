@@ -1,12 +1,26 @@
 package com.adoo2.findYourGuide2.model;
 
-import jakarta.persistence.*;
+import java.util.Date;
+
+import com.adoo2.findYourGuide2.service.CalificacionService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -22,18 +36,26 @@ public abstract class Trofeo {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnore
     private Usuario usuario;
 
     @Temporal(TemporalType.DATE)
     private Date fechaObtencion;
 
-    @ManyToOne
-    @JoinColumn(name = "calificacion_id", nullable = false)
-    private Calificacion observable;
+    //@ManyToOne
+    //@JoinColumn(name = "calificacion_id", nullable = true)
+    //private Calificacion observable;
 
-    public abstract boolean verificarCriterios();
+    public abstract boolean verificarCriterios(Guia guia, Turista turista,CalificacionService calificacionService);
     
-    public void otorgarTrofeo(Usuario usuario, Trofeo trofeo) {
-        // Lógica para otorgar el trofeo
+    public abstract Trofeo otorgarTrofeo(Usuario usuario);
+
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
+    public void setfecha(Date fecha){
+        this.fechaObtencion = fecha;
+    }
+
+   
 }
