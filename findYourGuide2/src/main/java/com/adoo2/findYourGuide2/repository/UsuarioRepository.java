@@ -1,5 +1,6 @@
 package com.adoo2.findYourGuide2.repository;
 
+import com.adoo2.findYourGuide2.model.Guia;
 import com.adoo2.findYourGuide2.model.Usuario;
 import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;

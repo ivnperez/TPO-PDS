@@ -23,8 +23,7 @@ import com.adoo2.findYourGuide2.service.MedioRegistro;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +39,7 @@ public class Usuario implements UserDetails{
     private String email;
     private String pass;
     private int telefono;
+    private String role;
 
     @Lob
     private byte[] fotoPerfil; // Assuming img is stored as a byte array
@@ -55,6 +55,15 @@ public class Usuario implements UserDetails{
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calificacion> listaCalificaciones;
 
+    public Usuario(String nombre, String apellido, int dni, String email, String pass, int telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.email = email;
+        this.pass = pass;
+        this.telefono = telefono;
+    }
+
     public void agregarUsuario(Usuario usuario) {
         // Lógica para agregar un usuario
     }
@@ -66,6 +75,7 @@ public class Usuario implements UserDetails{
     public void login(UsuarioTuristaDTO usuarioDTO) {
         // Lógica para login
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this instanceof Guia) {
@@ -76,6 +86,7 @@ public class Usuario implements UserDetails{
             return List.of();
         }
     }
+
     @Override
     public String getPassword() {
         return this.pass;
@@ -85,6 +96,7 @@ public class Usuario implements UserDetails{
     public String getUsername() {
         return this.email;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

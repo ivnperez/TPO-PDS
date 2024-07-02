@@ -31,10 +31,10 @@ public class UsuarioController {
     public Usuario createUsuario(@RequestBody Usuario usuario) {
         return usuarioService.save(usuario);
     }
-    @PostMapping("/guia")
-    public Usuario createUsuario(@RequestBody Guia guia) {
-        return guiaService.save(guia);
-    }
+    // @PostMapping("/guia")
+    // public Usuario createUsuario(@RequestBody Guia guia) {
+    //     return guiaService.save(guia);
+    // }
 
     @DeleteMapping("/{id}")
     public void deleteUsuario(@PathVariable Long id) {

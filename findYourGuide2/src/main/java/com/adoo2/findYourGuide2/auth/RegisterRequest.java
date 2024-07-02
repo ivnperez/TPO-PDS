@@ -1,6 +1,5 @@
 package com.adoo2.findYourGuide2.auth;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +17,5 @@ public class RegisterRequest {
     private String email;
     private String pass;
     private int telefono;
+    private String role;
 }

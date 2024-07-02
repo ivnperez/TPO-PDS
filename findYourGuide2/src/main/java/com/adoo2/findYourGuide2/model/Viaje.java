@@ -46,7 +46,7 @@ public class Viaje {
     private Factura factura;
 
     @ManyToOne
-    @JoinColumn(name = "reserva_id", nullable = false)
+    @JoinColumn(name = "reserva_id", nullable = true)
     private Reserva reserva;
 
     @Transient
