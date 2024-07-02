@@ -1,4 +1,8 @@
 package com.adoo2.findYourGuide2.model;
+import java.util.Date;
+import java.util.List;
+
+import com.adoo2.findYourGuide2.service.CalificacionService;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -16,24 +20,32 @@ public class TrofeoExito extends Trofeo {
     private int minimoCalificaciones = 10;
 
     @Override
-    public boolean verificarCriterios(Guia guia, Turista turista) {
-        int cant = guia.getCalificaciones().size();
+    public boolean verificarCriterios(Guia guia, Turista turista,CalificacionService calificacionService) {
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("llegue a trofeo exito");
+        List<Calificacion> listaCalif = calificacionService.buscarCalifcacionPorGuia(guia.getId()) ;
+        int cant = listaCalif.size();
+        System.out.println(cant);
+        System.out.println(cant >= minimoCalificaciones);
+        
         boolean darTrofeo = false;
-        for (Calificacion calif : guia.getCalificaciones()) {
-            if (calif.getPuntaje() > calificacion && cant > minimoCalificaciones) {
+        for (Calificacion calif : listaCalif) {
+            if (calif.getPuntaje() >= calificacion && cant >= minimoCalificaciones) {
                 darTrofeo = true;
             }
         }
-        // if ((darTrofeo)) {
-        // otorgarTrofeo(guia);
-        // }
+        System.out.println(darTrofeo);
         return darTrofeo;
     }
 
     @Override
-    public void otorgarTrofeo(Usuario usuario) {
+    public Trofeo otorgarTrofeo(Usuario usuario) {
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("llegue a otorgar trofeo exito");
         TrofeoExito trofeo = new TrofeoExito();
         usuario.getListaTrofeos().add(trofeo);
         trofeo.setUsuario(usuario);
+        trofeo.setfecha(new Date());
+        return trofeo;
     }
 }
