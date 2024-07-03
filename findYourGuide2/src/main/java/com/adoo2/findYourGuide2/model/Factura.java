@@ -11,8 +11,6 @@ import lombok.Setter;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,36 +23,43 @@ public class Factura {
 
     private double comisionDePlataforma;
     private double montoTotal;
+    private double anticipo;
 
     @Temporal(TemporalType.DATE)
     private Date fechaFactura;
 
-    @ManyToOne
-    @JoinColumn(name = "viaje_id", nullable = false)
-    private Viaje viaje;
+    // @ManyToOne
+    // @JoinColumn(name = "viaje_id", nullable = true)
+    // private Viaje viaje;
 
-    @ManyToOne
-    @JoinColumn(name = "servicio_ofrecido_id", nullable = false)
-    private Servicios_Ofrecidos servicio;
+    // @ManyToOne
+    // @JoinColumn(name = "servicio_ofrecido_id", nullable = true)
+    // private Servicios_Ofrecidos servicio;
 
     @Transient
     private IEstado estado;
 
-//    @Autowired
+    private String estadoFactura;
+
+    // @Autowired
     private Notificador notificador;
 
-    public void enviarFactura(Turista turista) { 
-        String mensaje = String.format("Estimado %s %s,\n\nAdjunto a este correo encontrará la factura del viaje.\n\nMonto total: %.2f\nComisión de plataforma: %.2f\nFecha: %s\n\nGracias por usar nuestros servicios.",
-                turista.getNombre(), turista.getApellido(), precioTotal(), comisionDePlataforma, fechaFactura.toString());
+    public void enviarFactura(Turista turista) {
+        // String mensaje = String.format(
+        // "Estimado %s %s,\n\nAdjunto a este correo encontrará la factura del
+        // viaje.\n\nMonto total: %.2f\nComisión de plataforma: %.2f\nFecha:
+        // %s\n\nGracias por usar nuestros servicios.",
+        // turista.getNombre(), turista.getApellido(), precioTotal(),
+        // comisionDePlataforma,
+        // fechaFactura.toString());
 
-        notificador.setGuia(this.viaje.getGuia());
-        notificador.setTurista(turista);
-        notificador.setMensaje(mensaje);
-        notificador.cambiarTipoNotificacion(new Notificaciones_email());
+        // notificador.setGuia(this.viaje.getGuia());
+        // notificador.setTurista(turista);
+        // notificador.setMensaje(mensaje);
+        // notificador.cambiarTipoNotificacion(new Notificaciones_email());
 
-        notificador.enviarNotificacion(turista);
+        // notificador.enviarNotificacion(turista);
     }
-
 
     public double precioTotal() {
         return montoTotal + comisionDePlataforma;

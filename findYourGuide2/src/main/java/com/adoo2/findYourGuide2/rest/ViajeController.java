@@ -45,4 +45,25 @@ public class ViajeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
+
+    @PostMapping("/{id}/abonar-reserva")
+    public ResponseEntity<Viaje> abonarReserva(@PathVariable Long id) {
+        try {
+            Viaje viaje = viajeService.abonarReserva(id);
+            return ResponseEntity.ok(viaje);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @PostMapping("/{id}/abonar-total")
+    public ResponseEntity<Viaje> abonarTotal(@PathVariable Long id) {
+        try {
+            Viaje viaje = viajeService.abonarTotal(id);
+            return ResponseEntity.ok(viaje);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
 }

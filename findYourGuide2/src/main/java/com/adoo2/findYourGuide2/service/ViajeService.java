@@ -28,14 +28,11 @@ public class ViajeService {
 
         @Transactional
         public Viaje crearViaje(CrearViajeRequest request) {
-                System.out.println("CREANDO VIAJE");
                 Guia guia = guiaRepository.findById(request.getGuiaId())
                                 .orElseThrow(() -> new IllegalArgumentException("Guia no encontrado"));
-                System.out.println("GUIA");
                 System.out.println(guia.getApellido());
                 Turista turista = turistaRepository.findById(request.getTuristaId())
                                 .orElseThrow(() -> new IllegalArgumentException("Turista no encontrado"));
-                System.out.println("TURISTA");
                 System.out.println(turista.getApellido());
                 // Servicios_Ofrecidos tour =
                 // serviciosOfrecidosRepository.findById(request.getTourId())
@@ -63,9 +60,6 @@ public class ViajeService {
         public Viaje aceptarViaje(Long id) {
                 Viaje viaje = viajeRepository.findById(id)
                                 .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
-                System.out.println("VIAJE");
-                System.out.println(viaje.getId());
-
                 Guia guia = viaje.getGuia();
                 Turista turista = viaje.getTurista();
                 viaje.setEstadoViaje(getEstadoViaje(viaje.getEstado()));
@@ -84,6 +78,50 @@ public class ViajeService {
                 return viajeRepository.save(viaje);
         }
 
+        @Transactional
+        public Viaje abonarReserva(Long id) {
+                Viaje viaje = viajeRepository.findById(id)
+                                .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
+
+                if (viaje.getFactura() == null) {
+                        Factura factura = new Factura();
+                        factura.setEstado(new ReservaImpaga());
+                        factura.setEstadoFactura("ReservaImpaga");
+                        factura.setComisionDePlataforma(viaje.getComisionDePlataforma());
+                        factura.setMontoTotal(viaje.getTotal());
+                        factura.setAnticipo(viaje.getAnticipo());
+                        factura.pagar();
+                        Factura savedFactura = facturaRepository.save(factura);
+                        viaje.setFactura(savedFactura);
+                        return viajeRepository.save(viaje);
+                } else {
+                        Factura factura = viaje.getFactura();
+                        factura.setEstado(getEstadoFactura(factura.getEstadoFactura()));
+                        factura.pagar();
+                        facturaRepository.save(factura);
+                        return viajeRepository.save(viaje);
+                }
+        }
+
+        @Transactional
+        public Viaje abonarTotal(Long id) {
+                Viaje viaje = viajeRepository.findById(id)
+                                .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
+                Factura factura = viaje.getFactura();
+
+                if (factura.getEstadoFactura().equals("ReservaPaga")) {
+                        factura.setEstado(new TotalImpago());
+                        factura.setEstadoFactura("TotalImpago");
+                        factura.pagar();
+                        facturaRepository.save(factura);
+                        return viajeRepository.save(viaje);
+                }
+                factura.setEstado(getEstadoFactura(factura.getEstadoFactura()));
+                factura.pagar();
+                facturaRepository.save(factura);
+                return viajeRepository.save(viaje);
+        }
+
         public IEstadoViaje getEstadoViaje(String estado) {
                 switch (estado) {
                         case "Aceptado":
@@ -94,6 +132,19 @@ public class ViajeService {
                                 return new Concretado();
                         default:
                                 return new Disponible();
+                }
+        }
+
+        public IEstado getEstadoFactura(String estado) {
+                switch (estado) {
+                        case "ReservaPaga":
+                                return new ReservaPaga();
+                        case "ReservaImpaga":
+                                return new ReservaImpaga();
+                        case "TotalPago":
+                                return new TotalPago();
+                        default:
+                                return new TotalImpago();
                 }
         }
 }
