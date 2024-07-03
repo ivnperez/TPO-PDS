@@ -39,8 +39,6 @@ public class Guia extends Usuario {
         super(nombre, apellido, dni, email, pass, telefono);
     }
 
-    // Métodos de negocio
-    // Se implementan en el servicio
     public List<Calificacion>getListaCalificaciones(){
         return calificaciones;
     }

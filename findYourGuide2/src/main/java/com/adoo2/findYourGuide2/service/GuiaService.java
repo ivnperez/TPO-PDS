@@ -34,10 +34,6 @@ public class GuiaService {
     public Guia save(Guia guia) {
         return guiaRepository.save(guia);
     }
-    // public Guia save(Guia guia) {
-    // return usuarioepository.save(guia);
-    // }
-
 
     public void agregarCalificacion(Calificacion calificacion, Long guiaId) {
         Optional<Guia> guiaOptional = guiaRepository.findById(guiaId);

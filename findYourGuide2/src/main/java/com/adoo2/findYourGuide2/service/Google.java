@@ -7,17 +7,17 @@ public class Google implements MedioRegistro {
 
     @Override
     public void agregarTurista(UsuarioTuristaDTO usuarioDTO) {
-        // Implementación para agregar turista usando Google
+        System.out.println("Turista registrado con Google");
     }
 
     @Override
     public void agregarGuia(UsuarioGuiaDTO usuarioDTO) {
-        // Implementación para agregar guía usando Google
+        System.out.println("Guía registrado con Google");
     }
 
     @Override
     public void login(UsuarioTuristaDTO usuarioDTO) {
-        // Implementación para login usando Google
+        System.out.println("Turista logueado con Google");
     }
 }
 

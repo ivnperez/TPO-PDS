@@ -15,8 +15,6 @@ public class ServiciosOfrecidosService {
     public void agregarServicioIndividual(TourIndividualDTO servicioDTO) {
         Servicios_Ofrecidos servicio = new Servicios_Ofrecidos();
         servicio.setDescripcion(servicioDTO.getDescripcion());
-        // servicio.setPrecio(servicioDTO.getPrecio()); // Ajustar si
-        // `Servicios_Ofrecidos` tiene precio
         servicio.setZona(servicioDTO.getZona());
         servicio.setTipo(new TourIndividual());
         // Guardar servicio en la base de datos
@@ -29,8 +27,6 @@ public class ServiciosOfrecidosService {
     public void agregarServicioGrupal(TourGrupalDTO servicioDTO) {
         Servicios_Ofrecidos servicio = new Servicios_Ofrecidos();
         servicio.setDescripcion(servicioDTO.getDescripcion());
-        // servicio.setPrecio(servicioDTO.getPrecio()); // Ajustar si
-        // `Servicios_Ofrecidos` tiene precio
         servicio.setZona(servicioDTO.getZona());
         servicio.setTamMaxGrupo(servicioDTO.getTamMaxGrupo());
         servicio.setTipo(new TourGrupal());
@@ -44,8 +40,6 @@ public class ServiciosOfrecidosService {
     public void agregarTraduccion(TraduccionDTO servicioDTO) {
         Servicios_Ofrecidos servicio = new Servicios_Ofrecidos();
         servicio.setDescripcion(servicioDTO.getDescripcion());
-        // servicio.setPrecio(servicioDTO.getPrecio()); // Ajustar si
-        // `Servicios_Ofrecidos` tiene precio
         servicio.setZona(servicioDTO.getZona());
         servicio.setIdiomas(servicioDTO.getIdiomas());
         servicio.setTipo(new Traduccion());
