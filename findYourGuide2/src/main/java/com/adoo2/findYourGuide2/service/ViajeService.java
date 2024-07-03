@@ -84,6 +84,17 @@ public class ViajeService {
                 return viajeRepository.save(viaje);
         }
 
+        @Transactional
+        public Viaje reservarViaje(Long id) {
+                Viaje viaje = viajeRepository.findById(id)
+                                .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
+                Guia guia = viaje.getGuia();
+                Turista turista = viaje.getTurista();
+                viaje.setEstadoViaje(getEstadoViaje(viaje.getEstado()));
+                viaje.reservar(guia, turista);
+                return viajeRepository.save(viaje);
+        }
+
         public IEstadoViaje getEstadoViaje(String estado) {
                 switch (estado) {
                         case "Aceptado":
