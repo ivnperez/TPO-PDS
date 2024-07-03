@@ -39,6 +39,11 @@ public class TrofeoReseña extends Trofeo {
         .stream()
         .map(calificaciones -> calificaciones.get(0)) // Obtener la primera calificación por cada guía
         .collect(Collectors.toList());
+
+        if (guia.getListaTrofeos().size() > 1) {
+            return darTrofeo;
+        }
+
         if (CalificacionesUnicas.size()>= minPuntuacionesDadas) {
             darTrofeo = true;
         }
