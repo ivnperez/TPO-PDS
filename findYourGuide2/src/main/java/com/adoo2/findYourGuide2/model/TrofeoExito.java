@@ -29,6 +29,12 @@ public class TrofeoExito extends Trofeo {
         System.out.println(cant >= minimoCalificaciones);
         
         boolean darTrofeo = false;
+
+        // No entregar trofeo si el guia ya posee uno
+        if (guia.getListaTrofeos().size() > 1) {
+            return darTrofeo;
+        }
+
         for (Calificacion calif : listaCalif) {
             if (calif.getPuntaje() >= calificacion && cant >= minimoCalificaciones) {
                 darTrofeo = true;
