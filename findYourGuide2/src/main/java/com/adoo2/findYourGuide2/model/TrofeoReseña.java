@@ -40,7 +40,7 @@ public class TrofeoReseña extends Trofeo {
         .map(calificaciones -> calificaciones.get(0)) // Obtener la primera calificación por cada guía
         .collect(Collectors.toList());
 
-        if (guia.getListaTrofeos().size() > 1) {
+        if (turista.getListaTrofeos().size() > 1) {
             return darTrofeo;
         }
 
