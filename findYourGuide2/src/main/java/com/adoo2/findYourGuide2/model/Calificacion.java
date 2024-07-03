@@ -44,7 +44,6 @@ public class Calificacion {
     @Transient
     private static List<Trofeo> interesados = new ArrayList<>();
 
-
     public static CalificacionTrofeo generarCalificacion(Guia guia, Turista turista, int puntaje, String comentario,CalificacionService calificacionService) {
         System.out.println("llegue a calificacion");
         Calificacion calificacion = new Calificacion();
@@ -53,7 +52,6 @@ public class Calificacion {
         calificacion.fecha =(new Date());
         calificacion.puntaje =puntaje;
         calificacion.comentario = comentario;
-        //interesados.forEach(trofeo -> trofeo.verificarCriterios(guia, turista));
         CalificacionTrofeo ct= new CalificacionTrofeo();
         ct.setTrofeo(null);
         for (Trofeo observador : interesados) {

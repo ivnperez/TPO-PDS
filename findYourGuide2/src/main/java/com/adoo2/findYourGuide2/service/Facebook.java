@@ -6,16 +6,16 @@ import com.adoo2.findYourGuide2.rest.dto.UsuarioGuiaDTO;
 public class Facebook implements MedioRegistro {
     @Override
     public void agregarTurista(UsuarioTuristaDTO usuarioDTO) {
-        // Implementación para agregar turista usando Facebook
+        System.out.println("Turista registrado con Facebook");
     }
 
     @Override
     public void agregarGuia(UsuarioGuiaDTO usuarioDTO) {
-        // Implementación para agregar guía usando Facebook
+        System.out.println("Guía registrado con Facebook");
     }
 
     @Override
     public void login(UsuarioTuristaDTO usuarioDTO) {
-        // Implementación para login usando Facebook
+        System.out.println("Turista logueado con Facebook");
     }
 }
