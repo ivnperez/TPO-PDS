@@ -46,6 +46,15 @@ public class ViajeController {
         }
     }
 
+    @PutMapping("/{id}/reservar")
+    public ResponseEntity<Viaje> reservar(@PathVariable Long id) {
+        try {
+            Viaje viaje = viajeService.reservarViaje(id);
+            return ResponseEntity.ok(viaje);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
     @PostMapping("/{id}/abonar-reserva")
     public ResponseEntity<Viaje> abonarReserva(@PathVariable Long id) {
         try {
