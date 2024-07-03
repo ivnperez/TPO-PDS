@@ -30,5 +30,4 @@ public class TrofeoService {
     public List<Trofeo> buscarTrofeoPorUsuario(Long id) {
         return trofeoRepository.findByUsuarioId(id);
     }
-  
 }

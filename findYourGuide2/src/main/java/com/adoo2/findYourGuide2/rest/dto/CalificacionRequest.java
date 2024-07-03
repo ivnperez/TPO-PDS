@@ -15,5 +15,4 @@ public class CalificacionRequest {
     public int puntaje;
     public String comentario;
 
-    // getters y setters
 }

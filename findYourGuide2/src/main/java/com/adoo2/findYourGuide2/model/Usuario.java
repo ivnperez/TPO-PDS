@@ -11,6 +11,7 @@ import com.adoo2.findYourGuide2.rest.dto.UsuarioTuristaDTO;
 import com.adoo2.findYourGuide2.service.MedioRegistro;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -60,10 +61,6 @@ public class Usuario implements UserDetails {
     @Autowired
     @Transient
     private MedioRegistro medio;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Trofeo> listaTrofeos;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Calificacion> listaCalificaciones;
 
     public Usuario(String nombre, String apellido, int dni, String email, String pass, int telefono) {
         this.nombre = nombre;
@@ -92,7 +89,7 @@ public class Usuario implements UserDetails {
 
     public Long getId(){
         return id;
-      
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this instanceof Guia) {

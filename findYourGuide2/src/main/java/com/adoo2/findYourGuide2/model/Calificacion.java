@@ -44,7 +44,6 @@ public class Calificacion {
     @Transient
     private static List<Trofeo> interesados = new ArrayList<>();
 
- 
 
     public static CalificacionTrofeo generarCalificacion(Guia guia, Turista turista, int puntaje, String comentario,CalificacionService calificacionService) {
         System.out.println("llegue a calificacion");
@@ -68,19 +67,7 @@ public class Calificacion {
     }
 
     public static void agregarObservador(Trofeo observador) {
-        interesados.add(observador);
-    @OneToMany(mappedBy = "observable", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Trofeo> interesados;
-
-    public static Calificacion generarCalificacion(Guia guia, Turista turista, int puntaje) {
-        Calificacion calificacion = new Calificacion();
-        calificacion.setGuia(guia);
-        calificacion.setTurista(turista);
-        calificacion.setFecha(new Date());
-        calificacion.setPuntaje(puntaje);
-        // Añadir lógica para verificar criterios y otorgar trofeos si es necesario
-        return calificacion;
-    }
+        interesados.add(observador);}
 
     public static List<Trofeo>  devolverObservadores() {
         for (Object interesados : interesados) {

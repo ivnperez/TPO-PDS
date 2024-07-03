@@ -45,7 +45,6 @@ public class UsuarioController {
     @Autowired
     @Transient
     private TrofeoService trofeoService;
-  
     @GetMapping
     public List<Usuario> getAllUsuarios() {
         return usuarioService.findAll();
