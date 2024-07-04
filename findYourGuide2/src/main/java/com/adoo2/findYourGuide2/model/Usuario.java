@@ -92,15 +92,15 @@ public class Usuario implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this instanceof Guia) {
-            return List.of(new SimpleGrantedAuthority("GUIA"));
-        } else if (this instanceof Turista) {
-            return List.of(new SimpleGrantedAuthority("TURISTA"));
+        if (this.getClass().getSimpleName().equals("Guia")) {
+            return List.of(new SimpleGrantedAuthority("ROLE_GUIA"));
+        } else if (this.getClass().getSimpleName().equals("Turista")) {
+            return List.of(new SimpleGrantedAuthority("ROLE_TURISTA"));
         } else {
             return List.of();
         }
     }
-
+    
     @Override
     public String getPassword() {
         return this.pass;

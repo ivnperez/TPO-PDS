@@ -30,7 +30,9 @@ public class SecurityConfig {
                     .requestMatchers("/api/v1/auth/**").permitAll()
                     .requestMatchers("/error/**").permitAll()
                     // Requiere el rol USER para todas las solicitudes a /catalogo/**
-                    .requestMatchers("/usuario/guia/**").hasAnyAuthority("GUIA")
+                    .requestMatchers("/guias/**").hasRole("TURISTA")
+                    .requestMatchers("/viajes/**").hasRole("TURISTA")
+                    .requestMatchers("/viajes/{id}/concretar").hasRole("GUIA")
                     // Todas las demás solicitudes requieren autenticación
                     .anyRequest().authenticated()
             )
