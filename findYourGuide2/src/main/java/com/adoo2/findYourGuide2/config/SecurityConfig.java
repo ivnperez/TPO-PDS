@@ -28,8 +28,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/error/**").permitAll()
-                        // Requiere el rol USER para todas las solicitudes a /catalogo/**
-                        .requestMatchers("/viajes/{id}/concretar").permitAll()
                         .requestMatchers("/viajes/{id}/aceptar").hasRole("GUIA")
                         .requestMatchers("/guias/**").hasRole("TURISTA")
                         .requestMatchers("/viajes/**").hasRole("TURISTA")
