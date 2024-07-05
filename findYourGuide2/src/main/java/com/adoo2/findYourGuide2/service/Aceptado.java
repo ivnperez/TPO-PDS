@@ -22,6 +22,7 @@ public class Aceptado implements IEstadoViaje {
     public void concretar(Guia guia, Turista turista, Viaje viaje) {
         IEstadoViaje estado = new Concretado();
         viaje.setEstadoViaje(estado);
+        viaje.setEstado("Concretado");
     }
 
     @Override

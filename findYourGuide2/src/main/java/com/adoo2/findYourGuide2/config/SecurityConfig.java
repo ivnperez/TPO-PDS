@@ -24,21 +24,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(req ->
-                req
-                    .requestMatchers("/api/v1/auth/**").permitAll()
-                    .requestMatchers("/error/**").permitAll()
-                    // Requiere el rol USER para todas las solicitudes a /catalogo/**
-                    .requestMatchers("/guias/**").hasRole("TURISTA")
-                    .requestMatchers("/viajes/**").hasRole("TURISTA")
-                    .requestMatchers("/viajes/{id}/concretar").hasRole("GUIA")
-                    // Todas las demás solicitudes requieren autenticación
-                    .anyRequest().authenticated()
-            )
-            .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-            .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/error/**").permitAll()
+                        // Requiere el rol USER para todas las solicitudes a /catalogo/**
+                        .requestMatchers("/viajes/{id}/concretar").permitAll()
+                        .requestMatchers("/viajes/{id}/aceptar").hasRole("GUIA")
+                        .requestMatchers("/guias/**").hasRole("TURISTA")
+                        .requestMatchers("/viajes/**").hasRole("TURISTA")
+                        // Todas las demás solicitudes requieren autenticación
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -13,6 +13,7 @@ public class Reservado implements IEstadoViaje {
     public void aceptar(Guia guia, Turista turista, Viaje viaje) {
         Aceptado estado = new Aceptado();
         viaje.setEstadoViaje(estado);
+        viaje.setEstado("Aceptado");
     }
 
     @Override

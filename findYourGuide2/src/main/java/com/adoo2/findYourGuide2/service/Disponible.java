@@ -26,5 +26,6 @@ public class Disponible implements IEstadoViaje {
     public void reservar(Guia guia, Turista turista, Viaje viaje) {
         Reservado estado = new Reservado();
         viaje.setEstadoViaje(estado);
+        viaje.setEstado("Reservado");
     }
 }
