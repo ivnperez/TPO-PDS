@@ -32,7 +32,7 @@ public class SecurityConfig {
                     // Requiere el rol USER para todas las solicitudes a /catalogo/**
                     .requestMatchers("/guias/**").hasRole("TURISTA")
                     .requestMatchers("/viajes/**").hasRole("TURISTA")
-                    .requestMatchers("/viajes/{id}/concretar").hasRole("GUIA")
+                    .requestMatchers("/viajes/{id}/aceptar").hasRole("GUIA")
                     // Todas las demás solicitudes requieren autenticación
                     .anyRequest().authenticated()
             )
